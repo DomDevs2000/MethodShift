@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import CycleTime
+from .models import Task
 
-class CycleTimeSerialzer(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CycleTime
+        model = Task
         fields = ["task_name", "start_date","end_date"]
