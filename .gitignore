@@ -1,2 +1,4 @@
 db.sqlite3
 mysite/__pycache__/
+api/__pycache__/
+api/migrations/__pycache__
