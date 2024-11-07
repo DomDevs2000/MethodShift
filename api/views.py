@@ -49,7 +49,7 @@ def tasks(request,pk)-> Response:
 
 @api_view(['POST'])
 def create_task(request)-> Response:
-    serializer = TaskSerializer(date=request.data)
+    serializer = TaskSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
