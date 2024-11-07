@@ -6,7 +6,7 @@ from api.models import Task
 from api.serializers import TaskSerializer
 
 
-# Test that the two tasks created in conftest.py exist and their task names match
+# Checks two tasks created in conftest.py exist and their task names match
 @pytest.mark.django_db
 def test_get_all_tasks(api_client, task):
 
@@ -24,7 +24,7 @@ def test_get_all_tasks(api_client, task):
     # assert any(task['task_name'] == "Test Task 2" for task in response.data)
 
 
-# Tests that checks that a new task was created
+# checks that a new task was created
 @pytest.mark.django_db
 def test_create_task_view(api_client, task_payload):
     url = reverse("create_task")
