@@ -13,7 +13,7 @@ from .serializers import TaskSerializer
 @api_view(['GET'])
 def get_all_tasks(request)-> Response:
     tasks: Task = Task.objects.all()
-    serializer: TaskSerializer = TaskSerializer(tasks,many=True)
+    serializer: TaskSerializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
 
 
@@ -31,14 +31,14 @@ def get_task(request,pk)-> Response:
 @api_view(['GET','PUT','DELETE'])
 def tasks(request,pk)-> Response:
     try:
-        task = Task.objects.get(pk=pk)
+        task: Task = Task.objects.get(pk=pk)
     except Task.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
-        serializer = TaskSerializer(task)
+        serializer: TaskSerializer = TaskSerializer(task)
         return Response(serializer.data)
     elif request.method=='PUT':
-        serializer = TaskSerializer(task,data=request.data)
+        serializer: TaskSerializer = TaskSerializer(task,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
