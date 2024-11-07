@@ -13,9 +13,9 @@ class Task(models.Model):
     @property
     def cycle_time(self)-> str:
         delta: timedelta = self.end_date - self.start_date
-        days = delta.days
-        hours = delta.seconds // 3600
-        minutes = (delta.seconds % 3600) // 60
+        days: int = delta.days
+        hours: int = delta.seconds // 3600
+        minutes: int = (delta.seconds % 3600) // 60
         return f"{days} days, {hours} hours, {minutes} minutes"
 
     def __str__(self)-> str:
