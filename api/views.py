@@ -24,7 +24,7 @@ def get_task(request: Request, pk) -> Response:
         serializer: TaskSerializer = TaskSerializer(task)
         return Response(serializer.data)
     except Task.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=404)
 
 
 @api_view(["GET", "PUT", "DELETE"])
@@ -32,7 +32,7 @@ def tasks(request: Request, pk) -> Response:
     try:
         task: Task = Task.objects.get(pk=pk)
     except Task.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=404)
     if request.method == "GET":
         serializer: TaskSerializer = TaskSerializer(task)
         return Response(serializer.data)
@@ -40,10 +40,10 @@ def tasks(request: Request, pk) -> Response:
         serializer: TaskSerializer = TaskSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=201)
     elif request.method == "DELETE":
         task.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=204)
 
 
 @api_view(["POST"])
@@ -51,8 +51,8 @@ def create_task(request) -> Response:
     serializer = TaskSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
 
 #
