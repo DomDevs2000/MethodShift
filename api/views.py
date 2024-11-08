@@ -1,20 +1,23 @@
 from django.http import Http404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import Task
 from .serializers import TaskSerializer
 
-# Create your views here.
 
 class TaskList(APIView):
+    @method_decorator(cache_page(60 * 15))
     def get(self, request: Request) -> Response:
         task: Task = Task.objects.all()
         serializer: TaskSerializer = TaskSerializer(task, many=True)
         return Response(serializer.data)
 
-    def post(self, request: Request)-> Response:
+    def post(self, request: Request) -> Response:
         serializer: TaskSerializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -23,7 +26,6 @@ class TaskList(APIView):
 
 
 class TaskDetail(APIView):
-
     def get_object(self, pk: int) -> any:
         try:
             return Task.objects.get(pk=pk)
