@@ -5,8 +5,10 @@ from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import Task
 from .serializers import TaskSerializer
+
 
 class TaskList(APIView):
     @method_decorator(cache_page(60 * 15))
