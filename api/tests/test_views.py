@@ -1,6 +1,7 @@
 import pytest
 from django.urls import reverse
 from rest_framework import status
+from api.views import TaskList
 
 from api.models import Task
 from api.serializers import TaskSerializer
@@ -10,7 +11,7 @@ from api.serializers import TaskSerializer
 @pytest.mark.django_db
 def test_get_all_tasks(api_client, task):
 
-    url = reverse("get_all_tasks")
+    url = reverse("task")
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
@@ -27,7 +28,7 @@ def test_get_all_tasks(api_client, task):
 # checks that a new task was created
 @pytest.mark.django_db
 def test_create_task_view(api_client, task_payload):
-    url = reverse("create_task")
+    url = reverse("task")
     response = api_client.post(url, data=task_payload, format="json")
 
     assert response.status_code == status.HTTP_201_CREATED
