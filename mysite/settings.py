@@ -26,13 +26,6 @@ SECRET_KEY = 'django-insecure-1p)(sgjqki1hd+xwrjclk21bt-7*!=r4f-1$x-k!#7u0e22)^-
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
-    }
-}
 # Application definition
 
 INSTALLED_APPS = [

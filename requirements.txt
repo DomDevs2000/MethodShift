@@ -1,5 +1,3 @@
-django~=5.1.3
-djangorestframework~=3.15.2
-environs
-
-pytest~=8.3.3
+django
+djangorestframework
+pytest
