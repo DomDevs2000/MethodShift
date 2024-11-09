@@ -11,7 +11,7 @@ from .serializers import TaskSerializer
 
 
 class TaskList(APIView):
-    @method_decorator(cache_page(60 * 15))
+    # @method_decorator(cache_page(60 * 15))
     def get(self, request: Request) -> Response:
         task: Task = Task.objects.all()
         serializer: TaskSerializer = TaskSerializer(task, many=True)
